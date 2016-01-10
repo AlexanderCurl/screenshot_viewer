@@ -1,0 +1,23 @@
+body {
+    padding-top: 50px;
+}
+.stuff {
+    padding: 40px 15px;
+}
+.shots {
+    float: left;
+    text-align: center;
+}
+.log {
+    float: right;
+    text-align: center;
+}
+.thumbs img {
+    width: 600px;
+    margin: 5px;
+}
+.thumbs li {
+    list-style-type: none;
+    margin-bottom: 20px;
+    background: #dedede;
+}

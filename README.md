@@ -1,2 +1,4 @@
-# screenshot_viewer
-Screenshot viewer for Call of Duty 4 written in php.
+# Screenshot/Log Viewer
+
+1. Fill out the config.yml
+2. Profit
