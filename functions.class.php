@@ -41,7 +41,7 @@ class ProcessClass {
         foreach ($retval as $a) {
             $out .= '<li>
             <img src="'.$this->config['ss_dir'].'/'.$a['name'].'"  class="img-thumbnail">
-            <br/><b>'.substr($a['name'],0,-4).'</b> @ '.date("Y.m.d. H:i:s.", $a['date']).' # '.round($a['size']/1024).'kB</li>';
+            <br/><b>'.substr($a['name'],0,-8).'</b> #'.substr($a['name'],-8,-4).' @ '.date("Y.m.d. H:i:s", $a['date']).' | '.round($a['size']/1024).'kB</li>';
         }
         $out .= "</ul>";
         
