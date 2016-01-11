@@ -24,7 +24,7 @@ class ProcessClass {
                 if ($entry != "." && $entry != "..") {
                     $timestamp = filemtime($dir.'/'.$entry);
                     if (isset($_GET['w']) and $_GET['w']=="today") {
-                        $terms = "return date('Ymd') == date('Ymd', strtotime($timestamp));";
+                        $terms = "return date('Ymd') == date('Ymd', $timestamp);";
                     } elseif(isset($_GET['w']) and $_GET['w']=="all") { $terms = "return 1==1;"; }
                     if (eval($terms)) {
                         $retval[$count]['name'] = $entry;
