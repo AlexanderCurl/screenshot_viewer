@@ -3,17 +3,10 @@ body {
 }
 .stuff {
     padding: 40px 15px;
-}
-.shots {
-    float: left;
-    text-align: center;
-}
-.log {
-    float: right;
     text-align: center;
 }
 .thumbs img {
-    width: 600px;
+    width: 90%;
     margin: 5px;
 }
 .thumbs li {

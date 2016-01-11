@@ -29,7 +29,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Shots/Log</a></li>
+            <li class="active"><a href="#">Shots</a></li>
+            <li class=""><a href="#">Log</a></li>
             <li><a href="#contact">Report</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -41,9 +42,6 @@
       <div class="stuff">
         <div class="shots">
             {{ shots }}
-        </div>
-        <div class="log">
-            <pre>{{ log }}</pre>
         </div>
       </div>
 
