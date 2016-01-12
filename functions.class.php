@@ -2,6 +2,7 @@
 
 class ProcessClass {
     public  $processed;
+    public  $when;
     private $config;
     
     public function __construct() {
@@ -11,8 +12,12 @@ class ProcessClass {
             die('Cant open config.ini');
         }
         
+        $this->when =(isset($_GET['w']))?$_GET['w']:"null";
+        
         $this->processed['shots']=$this->ShotsProcess();
         $this->processed['log']=$this->LogProcess();
+        
+        $this->LinkActivate($this->when);
     }
     
     public function ShotsProcess() {
@@ -23,10 +28,15 @@ class ProcessClass {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {
                     $timestamp = filemtime($dir.'/'.$entry);
-                    if (isset($_GET['w']) and $_GET['w']=="today") {
-                        $terms = "return date('Ymd') == date('Ymd', $timestamp);";
-                    } elseif(isset($_GET['w']) and $_GET['w']=="all") { $terms = "return 1==1;"; }
-                    if (eval($terms)) {
+
+                    if ($this->when=="today") {
+                        $terms = date('Ymd') == date('Ymd', $timestamp);
+                    } elseif ($this->when=="hour") {
+                        $terms = strtotime('-1 hour') < $timestamp;
+                    } elseif($this->when=="all") { 
+                        $terms = true; 
+                    } else { $terms = false; }
+                    if ($terms) {
                         $retval[$count]['name'] = $entry;
                         $retval[$count]['date'] = $timestamp;
                         $retval[$count]['size'] = filesize($dir.'/'.$entry);
@@ -62,7 +72,8 @@ class ProcessClass {
         return $file;
     }
     
-    public function LinkActivate($w) {
+    public function LinkActivate($w=null) {
+        if ($w=="hour") { $this->processed['active_hour'] = "active";}
         if ($w=="today") { $this->processed['active_today'] = "active";}
         if ($w=="all") { $this->processed['active_all'] = "active";}
     }
@@ -70,7 +81,6 @@ class ProcessClass {
     public function render($file) {
         $output = file_get_contents($file);
         preg_match_all("/(?<=\{{ )(.*?)(?=\ }})/", $output, $values);
-        $this->LinkActivate($_GET['w']);
 
         foreach($values[0] as $v) {
             if (isset($this->config[$v])) {

@@ -29,6 +29,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li class="{{ active_hour }}"><a href="//{{ app_url }}/index.php?w=hour">Last Hour</a></li>
             <li class="{{ active_today }}"><a href="//{{ app_url }}/index.php?w=today">Today</a></li>
             <li class="{{ active_all }}"><a href="//{{ app_url }}/index.php?w=all">All time</a></li>
           </ul>
