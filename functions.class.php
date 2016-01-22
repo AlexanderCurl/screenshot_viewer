@@ -38,6 +38,7 @@ class ProcessClass {
                     } else { $terms = false; }
                     if ($terms) {
                         $retval[$count]['name'] = $entry;
+                        $retval[$count]['path'] = str_replace("#", "%23", $entry);
                         $retval[$count]['date'] = $timestamp;
                         $retval[$count]['size'] = filesize($dir.'/'.$entry);
                     }
@@ -57,7 +58,7 @@ class ProcessClass {
             $out = "<ul class='thumbs'>";
             foreach ($retval as $a) {
                 $out .= '<li>
-                <img src="'.$this->config['ss_dir'].'/'.$a['name'].'"  class="img-thumbnail">
+                <img src="'.$this->config['ss_dir'].'/'.$a['path'].'"  class="img-thumbnail">
                 <br/><b>'.substr($a['name'],0,-8).'</b> #'.substr($a['name'],-8,-4).' @ '.date("Y.m.d. H:i:s", $a['date']).' | '.round($a['size']/1024).'kB</li>';
             }
             $out .= "</ul>";
