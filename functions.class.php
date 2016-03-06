@@ -13,15 +13,22 @@ class ProcessClass {
         }
         
         $this->when =(isset($_GET['w']))?$_GET['w']:"null";
+        $this->server =(isset($_GET['s']))?$_GET['s']:"null";
         
         $this->processed['shots']=$this->ShotsProcess();
         $this->processed['log']=$this->LogProcess();
+        $this->processed['actual_server']=$this->server;
+        $this->processed['actual_when']=$this->when;
         
-        $this->LinkActivate($this->when);
+        $this->LinkActivate($this->when, $this->server);
     }
     
     public function ShotsProcess() {
-        $dir = $this->config['ss_dir'];
+        $dirs = $this->config['ss_dir'];
+        $dirs = explode(",", $dirs);
+        $onedir = preg_grep('/'.$this->server.'/',$dirs);
+        $dir = array_shift( $onedir );
+//var_dump($dir);die();
         $count=0;
         // Getting the directory list
         if ($handle = opendir($dir)) {
@@ -58,7 +65,7 @@ class ProcessClass {
             $out = "<ul class='thumbs'>";
             foreach ($retval as $a) {
                 $out .= '<li>
-                <img src="'.$this->config['ss_dir'].'/'.$a['path'].'"  class="img-thumbnail">
+                <img src="'.$dir.'/'.$a['path'].'"  class="img-thumbnail">
                 <br/><b>'.substr($a['name'],0,-8).'</b> #'.substr($a['name'],-8,-4).' @ '.date("Y.m.d. H:i:s", $a['date']).' | '.round($a['size']/1024).'kB</li>';
             }
             $out .= "</ul>";
@@ -73,10 +80,12 @@ class ProcessClass {
         return $file;
     }
     
-    public function LinkActivate($w=null) {
+    public function LinkActivate($w=null,$s=null) {
         if ($w=="hour") { $this->processed['active_hour'] = "active";}
         if ($w=="today") { $this->processed['active_today'] = "active";}
         if ($w=="all") { $this->processed['active_all'] = "active";}
+        if ($s=="tdm") { $this->processed['active_tdm'] = "active";}
+        if ($s=="sd") { $this->processed['active_sd'] = "active";}
     }
     
     public function render($file) {

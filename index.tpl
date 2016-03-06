@@ -29,9 +29,13 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="{{ active_hour }}"><a href="//{{ app_url }}/index.php?w=hour">Last Hour</a></li>
-            <li class="{{ active_today }}"><a href="//{{ app_url }}/index.php?w=today">Today</a></li>
-            <li class="{{ active_all }}"><a href="//{{ app_url }}/index.php?w=all">All time</a></li>
+            <li style="height: 40px;margin: 5px;border-right: 1px solid #bbbbbb;border-left: 1px solid #b2b2b2;"></li>
+            <li class="{{ active_sd }}"><a href="//{{ app_url }}/index.php?s=sd&w={{ actual_when }}">SD</a></li>
+            <li class="{{ active_tdm }}"><a href="//{{ app_url }}/index.php?s=tdm&w={{ actual_when }}">TDM</a></li>
+            <li style="height: 40px;margin: 5px;border-right: 1px solid #bbbbbb;border-left: 1px solid #b2b2b2;"></li>
+            <li class="{{ active_hour }}"><a href="//{{ app_url }}/index.php?w=hour&s={{ actual_server }}">Last Hour</a></li>
+            <li class="{{ active_today }}"><a href="//{{ app_url }}/index.php?w=today&s={{ actual_server }}">Today</a></li>
+            <li class="{{ active_all }}"><a href="//{{ app_url }}/index.php?w=all&s={{ actual_server }}">All time</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
